@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import classes from './App.module.css';
 
 import Person from './Person/Person';
 
@@ -55,11 +55,15 @@ class App extends Component {
 
   render() {
 
-    let classes = [];
+    let assignedClasses = [];
 
     let persons = null;
 
+    let btnClass = [classes.Button];
+
     if (this.state.showPersons) {
+
+      btnClass.push(classes.Red);
 
       persons = (
         <div>
@@ -79,18 +83,20 @@ class App extends Component {
     }
 
     if (this.state.persons.length <= 2) {
-      classes.push('red');
+      assignedClasses.push(classes.red);
     }
 
     if (this.state.persons.length <= 1) {
-      classes.push('bold');
+      assignedClasses.push(classes.bold);
     }
 
     return (
-        <div className="App">
+        <div className={classes.App}>
           <h1>Hello World!</h1>
-          <p className={classes.join(' ')}>Dynamic Styling!!!</p>
-          <button className='button' onClick={this.togglePersonsHandler}>
+          <p className={assignedClasses.join(' ')}>Dynamic Styling!!!</p>
+          <button 
+            className={btnClass.join(' ')} 
+            onClick={this.togglePersonsHandler}>
             Toggle Persons
           </button>
           {persons}
